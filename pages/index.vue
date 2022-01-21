@@ -1,7 +1,5 @@
 <template>
 <div class="home">
-<!--  Navbar-->
-  <Navbar/>
 
 <!--  Hero-->
   <Hero/>
@@ -75,12 +73,11 @@
 import axios from 'axios';
 import Hero from "../components/Hero";
 import Loading from "../components/Loading";
-import Navbar from "../components/Navbar";
 
 export default {
 
   name: 'IndexPage',
-  components: {Navbar, Hero, Loading},
+  components: { Hero, Loading},
   head() {
     return {
       title : 'Movie App  - Latest Streaming Movie Info',

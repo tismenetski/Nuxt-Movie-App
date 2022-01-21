@@ -38,6 +38,7 @@
 <script>
 // This is a route param component
 import axios from 'axios';
+
 export default {
   name: "single-movie",
   head() {

@@ -3,7 +3,7 @@
   <h1 class="genres-title">Please Select a Genre</h1>
   <ul class="genres-list" >
     <li v-for="(genre,index) in genres" :key="index" >
-     <NuxtLink class="button button-light" :to="{name : 'movies-genresid', params : {genre : genre.id}}">{{genre.name}}</NuxtLink>
+     <NuxtLink class="button button-light" :to="{name : 'movies-genresid', params : {genresid : genre.id , genre: genre.name}}">{{genre.name}}</NuxtLink>
     </li>
   </ul>
 </div>
@@ -26,6 +26,7 @@ export default {
       const data = axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=7de6e315194ae37cda48fe5d2273c6cf&language=en-US`)
       const response = await data;
       this.genres = response.data.genres;
+      console.log(this.genres)
     }
   }
 }
