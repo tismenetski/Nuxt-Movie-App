@@ -1,6 +1,6 @@
 <template>
 <nav class="site-navigation">
-  <a class="brand" to="#" >Movie App</a>
+  <a href="/" class="brand">Movie App</a>
   <ul class="menu-list">
     <li>
 
@@ -20,6 +20,8 @@ export default {
 
 <style lang="scss" scoped>
 
+
+
 .site-navigation {
   display: flex;
   flex-direction: row;
@@ -31,6 +33,8 @@ export default {
     display: block;
     align-self: center;
     padding: 20px;
+    text-decoration: none;
+
   }
 
   .menu-list {
@@ -39,9 +43,6 @@ export default {
     flex-direction: row;
     justify-content: flex-start;
     list-style: none;
-
-
-
 
     li {
       padding: 20px;
@@ -53,6 +54,10 @@ export default {
     }
 
   }
+}
+
+a:visited , a:active {
+  color :inherit;
 }
 
 
