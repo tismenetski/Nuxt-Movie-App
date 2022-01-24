@@ -95,8 +95,10 @@ export default {
     },
     activateFilter(event) {
       // Clean all existing filters
-      for (const [value] of Object.entries(this.genreFilters)) {
-        value.active = false;
+      for (const [key,value] of Object.entries(this.genreFilters)) {
+         value.active = false;
+        console.log(value);
+        console.log(key);
       }
       this.filteredMovies = [];
 
