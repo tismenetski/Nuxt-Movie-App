@@ -25,6 +25,7 @@
           <p>Overview: {{movie.overview}}</p>
           <p>Release Date: {{movie.release_date}}</p>
           <p>Vote Average: {{movie.vote_average}}</p>
+          <NuxtLink :to="{name : 'movies-SimilarMovies', params : {movieid : movie.id}}" class="button button-light">See Similar Movies</NuxtLink>
         </div>
       </div>
     </li>
@@ -161,9 +162,13 @@ export default {
   .single-movie-info {
 
     p {
-      padding: 20px;
+      margin-left: 20px;
+      padding: 20px 0;
       font-size: 25px;
     }
+    .button{
+    margin-left: 20px;
+  }
   }
 
   .filter-items {
