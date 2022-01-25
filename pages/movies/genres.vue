@@ -72,8 +72,9 @@ export default {
       font-size: 38px;
     }
     .genres-list {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
     }
+
   }
 
 }
@@ -82,10 +83,21 @@ export default {
   .genres {
 
     .genres-title {
-      font-size: 34px;
+      font-size: 30px;
     }
     .genres-list {
       grid-template-columns: 1fr 1fr;
+      column-gap: 30px;
+
+      li {
+        padding: 0;
+        background-color: transparent;
+
+        a {
+          width: 150px;
+          text-align: center;
+        }
+      }
     }
   }
 
