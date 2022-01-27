@@ -107,5 +107,28 @@ export default {
     }
   }
 
+@media (max-width: 480px) {
+
+
+
+    .single-movie {
+      flex-direction: column;
+
+      .single-movie-image img {
+        max-width:100%;
+        max-height:100%;
+
+      }
+    }
+
+    .filter-items {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+
+
 
 </style>

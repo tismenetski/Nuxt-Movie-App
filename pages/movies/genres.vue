@@ -94,7 +94,7 @@ export default {
         background-color: transparent;
 
         a {
-          width: 150px;
+          width: 40vw;
           text-align: center;
         }
       }
