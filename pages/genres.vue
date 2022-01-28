@@ -4,7 +4,7 @@
   <NuxtLink :to="{name: 'index'}" class="button button-light">Back</NuxtLink>
   <ul class="genres-list" >
     <li v-for="(genre,index) in genres" :key="index" >
-     <NuxtLink class="button button-light" :to="{name : 'movies-genresid', params : {genresid : genre.id , genre: genre.name}}">{{genre.name}}</NuxtLink>
+     <NuxtLink class="button button-light" :to="{name : 'genres-genresid', params : {genresid : genre.id , genre: genre.name}}">{{genre.name}}</NuxtLink>
     </li>
   </ul>
 </div>
