@@ -9,10 +9,10 @@
     <div class="movie-content">
       <h1>Title: {{movie.title}}</h1>
       <p class="movie-fact tagline">
-        <span>Tagline: </span>"{{movie.tagline}}"
+        <span>Tagline:</span> "{{movie.tagline}}"
       </p>
       <p class="movie-fact">
-<span>Released: </span>
+<span>Released:</span>
          {{
         new Date(movie.release_date).toLocaleString('en-us', {
         month: 'long',
@@ -21,17 +21,25 @@
         }}
       </p>
       <p class="movie-fact">
-        <span>Duration: </span> {{movie.runtime}} minutes
+        <span>Duration:</span> {{movie.runtime}} minutes
+      </p>
+      <p class="movie-fact">
+        <span>Budget:</span> {{movie.budget.toLocaleString('en-us', {style : 'currency', currency : 'USD'})}}
       </p>
       <p class="movie-fact">
         <span>Revenue:</span>
         {{movie.revenue.toLocaleString('en-us', {style : 'currency', currency : 'USD'})}}
       </p>
       <p class="movie-fact">
-        <span>Overview: </span>{{movie.overview}}
+        <span>Overview:</span> {{movie.overview}}
+      </p>
+      <p class="movie-fact">
+        <span>Vote Average:</span> {{ movie.vote_average}}
       </p>
     </div>
   </div>
+
+<!--  <youtube :video-id="aC40LnWR9TE"></youtube>-->
 </div>
 </template>
 
@@ -43,11 +51,16 @@ export default {
   name: "single-movie",
   data() {
     return {
-      movie : ''
+      movie : '',
+      images : [],
+      videos : [],
+      videoId : ''
     }
   },
   async fetch() {
     await this.getSingleMovie();
+    await this.getSingleMovieImages();
+    await this.getSingleMovieVideos();
   },
   head() {
     return {
@@ -61,6 +74,23 @@ export default {
       const data = axios.get(`https://api.themoviedb.org/3/movie/${this.$route.params.movieid}?api_key=7de6e315194ae37cda48fe5d2273c6cf&language=en-US`)
       const result = await data;
       this.movie = result.data;
+    },
+    async getSingleMovieImages() {
+      const data = axios.get(`https://api.themoviedb.org/3/movie/${this.$route.params.movieid}/images?api_key=7de6e315194ae37cda48fe5d2273c6cf&language=en-US&include_image_language=en`)
+      const result = await data;
+      console.log(result);
+      this.images = result.data;
+    },
+
+    async getSingleMovieVideos() {
+      const data = axios.get(`https://api.themoviedb.org/3/movie/${this.$route.params.movieid}/videos?api_key=7de6e315194ae37cda48fe5d2273c6cf&language=en-US&include_image_language=en`)
+      const result = await data;
+      console.log(result);
+      this.videos = result.data;
+    },
+    method (url) {
+      this.videoId = this.$youtube.getIdFromURL(url)
+      this.startTime = this.$youtube.getTimeFromURL(url)
     }
   }
 }
