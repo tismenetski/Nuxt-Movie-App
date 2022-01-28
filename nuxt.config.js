@@ -11,7 +11,8 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' } , {rel : 'stylesheet' , href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'}],
+
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -20,7 +21,9 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    {src: '@/plugins/youtube' , ssr:false}
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -44,5 +47,5 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {transpile : ['vue-youtube-embed']  },
 }

@@ -15,7 +15,7 @@
     </div>
 
     <div class="nav-links">
-      <NuxtLink :to="{name : 'movies-genres'}">Genres</NuxtLink>
+      <NuxtLink :to="{name : 'genres'}">Genres</NuxtLink>
     </div>
   </div>
 </template>
