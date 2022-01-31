@@ -41,7 +41,7 @@
   <h2 class="trailer-header">Watch Trailer</h2>
   <no-ssr  placeholder="Loading...">
 <!--    <youtube :player-vars="{ autoplay: 1 }"  :player-width="100" :player-height="100"  :video-id="PnJY20UCH9c"    />-->
-    <youtube  :video-id="videoId" ></youtube>
+    <youtube  :video-id="trailerVideo" ></youtube>
   </no-ssr>
 <!--  <youtube :video-id="aC40LnWR9TE"></youtube>-->
 </div>
@@ -58,7 +58,7 @@ export default {
       movie : '',
       images : [],
       videos : [],
-      videoId : 'PnJY20UCH9c'
+      trailerVideo : ''
     }
   },
   async fetch() {
@@ -82,7 +82,6 @@ export default {
     async getSingleMovieImages() {
       const data = axios.get(`https://api.themoviedb.org/3/movie/${this.$route.params.movieid}/images?api_key=7de6e315194ae37cda48fe5d2273c6cf&language=en-US&include_image_language=en`)
       const result = await data;
-      console.log(result);
       this.images = result.data;
     },
 
@@ -90,7 +89,15 @@ export default {
       const data = axios.get(`https://api.themoviedb.org/3/movie/${this.$route.params.movieid}/videos?api_key=7de6e315194ae37cda48fe5d2273c6cf&language=en-US&include_image_language=en`)
       const result = await data;
       this.videos = result.data;
-    },
+
+      this.videos.results.forEach(video => {
+
+        if (video.name === 'Official Trailer' && video.type === 'Trailer') {
+          this.trailerVideo = video.key;
+        }
+      });
+    }
+,
     method (url) {
       this.videoId = this.$youtube.getIdFromURL(url)
       this.startTime = this.$youtube.getTimeFromURL(url)
