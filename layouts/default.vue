@@ -12,3 +12,11 @@ export default {
   components: {Navbar}
 }
 </script>
+
+<style lang="scss">
+
+.app::-webkit-scrollbar {
+  background: transparent; /* Chrome/Safari/Webkit */
+  width: 0;
+}
+</style>

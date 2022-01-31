@@ -38,12 +38,18 @@
       </p>
     </div>
   </div>
-  
+<!--  <a class="trailer-link" href="#" @click="scrollToTrailer">Watch Trailer</a>-->
   <h2 class="trailer-header">Watch Trailer</h2>
   <no-ssr  placeholder="Loading...">
 <!--    <youtube :player-vars="{ autoplay: 1 }"  :player-width="100" :player-height="100"  :video-id="PnJY20UCH9c"    />-->
     <youtube class="youtube-video" player-width="100%" player-height="400"  :video-id="trailerVideo.key" ></youtube>
   </no-ssr>
+
+
+  <h2 class="images-header">Images</h2>
+  <VueSlickCarousel class="carousel" v-bind="carouselSettings">
+    <img v-for="(image,index) in images" :key="index" :src="`https://image.tmdb.org/t/p/w500/${image.path}`"  alt="">
+  </VueSlickCarousel>
 <!--  <youtube :video-id="aC40LnWR9TE"></youtube>-->
 </div>
 </template>
@@ -51,9 +57,13 @@
 <script>
 // This is a route param component
 import axios from 'axios';
-
+import VueSlickCarousel from 'vue-slick-carousel'
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+// optional style for arrows & dots
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 export default {
   name: "single-movie",
+  components: { VueSlickCarousel },
   data() {
     return {
       movie : '',
@@ -65,6 +75,32 @@ export default {
       window : {
         height: '',
         width : ''
+      },
+      carouselSettings :{
+        arrows: false,
+        dots: true,
+        speed : 500,
+        slidesToShow : 5,
+        fade : true,
+        responsive : [
+          {
+            breakpoint : 586,
+            settings : {
+              slidesToShow: 1
+            },
+
+          },
+          {
+            breakpoint : 784,
+            settings : {
+              slidesToShow: 3
+            },
+
+          }
+        ]
+
+
+
       }
 
     }
@@ -105,7 +141,17 @@ export default {
     async getSingleMovieImages() {
       const data = axios.get(`https://api.themoviedb.org/3/movie/${this.$route.params.movieid}/images?api_key=7de6e315194ae37cda48fe5d2273c6cf&language=en-US&include_image_language=en`)
       const result = await data;
-      this.images = result.data;
+
+      let key = 0;
+      result.data.posters.forEach(image=> {
+
+        const imageObj = {
+          key,
+          path : image.file_path
+        }
+        key++;
+        this.images.push(imageObj);
+      } )
     },
 
     // Get the trailer for a movie
@@ -126,10 +172,7 @@ export default {
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
     },
-
   },
-
-
 
 }
 </script>
@@ -190,12 +233,24 @@ export default {
   }
 }
 
-.trailer-header {
+.trailer-header, .images-header {
   margin-top: 50px;
   text-align: center;
 }
 
+.trailer-link {
+  margin-top: 50px;
+  text-decoration: none;
+  text-align: center;
+  color : #fff;
+  font-size: 42px;
+}
+
 .youtube-video {
+  margin-top: 50px;
+}
+
+.carousel {
   margin-top: 50px;
 }
 
