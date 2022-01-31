@@ -38,7 +38,11 @@
       </p>
     </div>
   </div>
-
+  <h2 class="trailer-header">Watch Trailer</h2>
+  <no-ssr  placeholder="Loading...">
+<!--    <youtube :player-vars="{ autoplay: 1 }"  :player-width="100" :player-height="100"  :video-id="PnJY20UCH9c"    />-->
+    <youtube  :video-id="videoId" ></youtube>
+  </no-ssr>
 <!--  <youtube :video-id="aC40LnWR9TE"></youtube>-->
 </div>
 </template>
@@ -54,7 +58,7 @@ export default {
       movie : '',
       images : [],
       videos : [],
-      videoId : ''
+      videoId : 'PnJY20UCH9c'
     }
   },
   async fetch() {
@@ -85,7 +89,6 @@ export default {
     async getSingleMovieVideos() {
       const data = axios.get(`https://api.themoviedb.org/3/movie/${this.$route.params.movieid}/videos?api_key=7de6e315194ae37cda48fe5d2273c6cf&language=en-US&include_image_language=en`)
       const result = await data;
-      console.log(result);
       this.videos = result.data;
     },
     method (url) {
